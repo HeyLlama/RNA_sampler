@@ -1,0 +1,48 @@
+M
+12
+
+/Users/Mia/Desktop/Sample_input.txt
+
+/**
+	 * Write file
+	 * @param args
+	 */
+//	public static void main(String[] args)
+//	{
+//		try
+//		{
+//			File file = new File("test.txt");
+//			PrintWriter output = new PrintWriter(file);
+//			output.println("M");
+//			output.println(12);
+//			output.close();
+//		}
+//		catch (IOException exc)
+//		{
+//			System.out.printf("error", exc);
+//		}
+//	}
+	
+//	/**
+//	 * Read file
+//	 */
+//	public static void main(String[] args)
+//	{
+//		try
+//		{
+//			File file = new File(
+//					"/Users/Mia/eclipse-workspace-BIMBL/RNA_sampler/test.txt");
+//			Scanner input = new Scanner(file);
+//			if (input.hasNextLine())
+//			{
+//				String name = input.nextLine();
+//				System.out.printf(name);
+//			}
+//			input.close();
+//			
+//		}
+//		catch (FileNotFoundException exc)
+//		{
+//			System.out.printf("error", exc);
+//		}
+//	}
