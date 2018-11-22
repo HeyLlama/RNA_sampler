@@ -114,7 +114,11 @@ public class CheckCompatibility
 		return false;
 	}
 
-
+	/**
+	 * Reads input file as template
+	 * @param pathIn
+	 * @param pathOut
+	 */
 	public void read(String pathIn, String pathOut)
 	{
 		try
@@ -133,9 +137,8 @@ public class CheckCompatibility
 		}
 		catch (FileNotFoundException exc)
 		{
-			System.out.printf("Error: file not found.", new Object[] { exc });
+			System.out.printf("Error: file not found.", exc);
 		}
-
 
 		try
 		{
@@ -151,13 +154,15 @@ public class CheckCompatibility
 		}
 		catch (FileNotFoundException exc)
 		{
-			System.out.printf("Error: file not found.", new Object[] { exc });
+			System.out.printf("Error: file not found.", exc);
 		}
 	}
 
-
-
-
+	/**
+	 * Convert linkedList to string
+	 * @param arg List to be converted
+	 * @return A string
+	 */
 	public String toStringStr(LinkedList<String> arg)
 	{
 		StringBuilder str = new StringBuilder();
@@ -174,9 +179,9 @@ public class CheckCompatibility
 		return str.toString();
 	}
 
-
-
-
+	/** 
+	 * Checks the Hamming distance
+	 */
 	public void checkHam()
 	{
 		int hammd = 0;

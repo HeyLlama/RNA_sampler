@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 public class CompareStructure {
 	// ~ Fields
-	private String currDir = "/Users/Mia/Desktop/";
+	//static String currDir = "/Users/Mia/Desktop/";
 			//private String currDir = "/home/moose60/Desktop/";
+	String currDir = UniRunner.currDir;
 	private String orgMFEStruct;
 	private int numIdenNa; 
 	private int numTotal;

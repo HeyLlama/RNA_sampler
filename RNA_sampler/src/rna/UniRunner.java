@@ -5,8 +5,21 @@ import java.io.File;
 import rnaInv.DerivedPair;
 
 public class UniRunner {
-	private static String currDir = "/Users/Mia/Desktop/";
-		//private static String currDir = "/home/moose60/Desktop/";
+	//String currDir = CompareStructure.currDir;
+	static String currDir = "C:\\Users\\30103\\Desktop\\";
+	//default
+	//static String currDir = "/Users/Mia/Desktop/";
+
+	/**
+	 * Sets the user directory
+	 */
+	public static void setDir(String dir)
+	{
+		System.out.printf("Please enter your I/O directory of the format:"
+				+ "/../../..");
+		currDir = dir;
+	}
+
 	/**
 	 * The input form the terminal will
 	 * be the paths for the input and 
@@ -16,9 +29,14 @@ public class UniRunner {
 	 */
 	public static void main(String[] args)
 	{
-		// if user given arguments
+		// // Parameters
+		// 1: user directory
+		// 2: function name
+		// 3: number of derived sequences
+		// 4: number of desired samples
 		if (args.length == 4)
 		{
+			/*
 			// takes the first path
 			File newFile = new File(args[0]);
 			if (newFile.isDirectory())
@@ -28,6 +46,48 @@ public class UniRunner {
 				int numSamples = 
 						Integer.parseInt(args[3]);
 				out.process(numSamples);
+			}
+			 */
+			// Computes the derived sequences
+			// computes the IFR for the derived pair
+			// takes the first path
+			File newFile = new File(args[0]);
+			if (newFile.isDirectory())
+			{
+				setDir(args[0]);
+			}
+			
+			if (args[1].equals("CleanAndDerivedSeq"))
+			{
+				// Produce derived sequences
+				DerivedPair der = new DerivedPair(
+						currDir + "Test_input.txt",
+						Integer.valueOf(args[2]),
+						Integer.valueOf(args[3]));
+
+				der.cleanUpInvfOutput(currDir + "invf.txt",
+						currDir + "Test_Derived.txt");
+
+				// generate n sequences for each pair
+				der.uniSamDerived(currDir + "Test_DerivedSamples.fasta");
+			}
+
+			// This begins after the sequences are folded
+			// This completes the operation by comparing 
+			// the derived structures with the original one
+			else if (args[0].equals("CompareInvFold"))
+			{
+				DerivedPair der = new DerivedPair(
+						currDir + "Test_input.txt",
+						Integer.valueOf(args[1]),
+						Integer.valueOf(args[2]));
+				der.compareStructure();
+				der.printString();
+				der.outputIFR();
+				der.meanIFR();
+				// Test
+				//der.convertWIndex();
+				//der.printMFEWIndex();
 			}
 		}
 		// First parameter function name
@@ -83,11 +143,8 @@ public class UniRunner {
 				System.out.println("Inverse fold sequence"
 						+ " comparison completed!");
 			}
-			
-
-
 		}
-		
+
 		// Parameters
 		// 1. Function name
 		// 2. Number of desired samples
@@ -112,7 +169,7 @@ public class UniRunner {
 		// 1: function name
 		// 2: number of derived sequences
 		// 3: number of desired samples
- 
+
 		else if (args.length == 3)
 		{
 			// Computes the derived sequences

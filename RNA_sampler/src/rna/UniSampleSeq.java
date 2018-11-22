@@ -1,7 +1,7 @@
 package rna;
 
 import java.util.Stack;
-import java.util.concurrent.ThreadLocalRandom;
+//import java.util.concurrent.ThreadLocalRandom;
 import java.math.BigInteger;
 import java.util.Random;
 /**
@@ -331,12 +331,24 @@ public class UniSampleSeq {
 		BigInteger currentScore = parmat[single][wc][wob][ham];
 		// generate a random number of range 1 to score from matrix
 		//Random randi = new Random();
-		//long prob_WC = ThreadLocalRandom.current().next(currentScore) + 1;
+		//long prob_WC = ThreadLocalRandom.current().nextLong(currentScore) + 1;
 		//int prob_WC = randi.nextLong(currentScore) + 1;
 		
 		// big Integer random generator
-		long mu1_WC = 0;
-		long mu2_WC = 0;
+		Random randi = new Random();
+		
+		// testing
+		randi.setSeed(1);
+		
+		BigInteger prob_WC = BigInteger.valueOf(0);
+		do {
+			prob_WC = new BigInteger(currentScore.bitLength(), randi);
+			prob_WC = prob_WC.add(BigInteger.valueOf(1));
+		}
+		while (prob_WC.compareTo(currentScore) > 0);
+		
+		BigInteger mu1_WC = BigInteger.valueOf(0);
+		BigInteger mu2_WC = BigInteger.valueOf(0);
 		
 		if (ham > 0)
 		{
@@ -344,12 +356,14 @@ public class UniSampleSeq {
 		}
 		if (ham > 1)
 		{
-			mu2_WC = 4*parmat[single][wc-1][wob][ham-2];
+			mu2_WC = parmat[single][wc-1][wob][ham-2]
+						.multiply(BigInteger.valueOf(4));
 		}
-		long noMute = parmat[single][wc-1][wob][ham];
+		BigInteger noMute = parmat[single][wc-1][wob][ham];
 		
 		// No mutation
-		if (prob_WC <= noMute)
+		//if (prob_WC <= noMute)
+		if (prob_WC.compareTo(noMute) <= 0)
 		{
 			comSeq[tempMuteIndex[0]] = tempPair[0];
 			comSeq[tempMuteIndex[1]] = tempPair[1];
@@ -357,7 +371,9 @@ public class UniSampleSeq {
 		}
 		
 		// mutate 1
-		else if ((prob_WC <= mu1_WC + noMute) && (prob_WC > noMute))
+		//else if ((prob_WC <= mu1_WC + noMute) && (prob_WC > noMute))
+		else if ((prob_WC.compareTo(mu1_WC.add(noMute))  <= 0)
+				&& (prob_WC.compareTo(noMute) > 0))
 		{
 			createPool(tempPair, 1);
 			
@@ -374,7 +390,9 @@ public class UniSampleSeq {
 		}
 		
 		// mutate 2
-		else if ((prob_WC <= mu1_WC + noMute + mu2_WC) && (prob_WC > mu1_WC + noMute))
+		//else if ((prob_WC <= mu1_WC + noMute + mu2_WC) && (prob_WC > mu1_WC + noMute))
+		else if ((prob_WC.compareTo(mu1_WC.add(noMute).add(mu2_WC)) <= 0)
+				&& (prob_WC.compareTo(mu1_WC.add(noMute)) > 0))
 		{
 			createPool(tempPair, 2);
 			int randInt = randi.nextInt(4);
@@ -398,27 +416,47 @@ public class UniSampleSeq {
 	private void ruleThree(char[] tempPair, int[] tempMuteIndex)
 	{
 		// mutate
-		long currentScore = parmat[single][wc][wob][ham];
+		BigInteger currentScore = parmat[single][wc][wob][ham];
 		// generate a random number of range 1 to score from matrix
-		Random randi = new Random();
-		long prob_Wob = ThreadLocalRandom.current().nextLong(currentScore) + 1;
+		//Random randi = new Random();
+		//long prob_Wob = ThreadLocalRandom.current().nextLong(currentScore) + 1;
 		//int prob_Wob = randi.nextInt(currentScore) + 1;
-		long mu1_Wob = 0;
-		long mu2_Wob = 0;
+		
+		Random randi = new Random();
+		
+		// testing
+		randi.setSeed(1);
+		
+		BigInteger prob_Wob = BigInteger.valueOf(0);
+		do {
+			prob_Wob = new BigInteger(currentScore.bitLength(), randi);
+			prob_Wob = prob_Wob.add(BigInteger.valueOf(1));
+		}
+		while (prob_Wob.compareTo(currentScore) > 0);
+		
+		
+		//BigInteger mu1_WC = BigInteger.valueOf(0);
+		//BigInteger mu2_WC = BigInteger.valueOf(0);
+		
+		BigInteger mu1_Wob = BigInteger.valueOf(0);
+		BigInteger mu2_Wob = BigInteger.valueOf(0);
 		
 		
 		if (ham > 0)
 		{
-			mu1_Wob = 2*parmat[single][wc][wob-1][ham-1];
+			mu1_Wob = parmat[single][wc][wob-1][ham-1]
+					.multiply(BigInteger.valueOf(2));
 		}
 		if (ham > 1)
 		{
-			mu2_Wob = 3*parmat[single][wc][wob-1][ham-2];
+			mu2_Wob = parmat[single][wc][wob-1][ham-2]
+					.multiply(BigInteger.valueOf(3));
 		}
-		long noMute = parmat[single][wc][wob-1][ham];
+		BigInteger noMute = parmat[single][wc][wob-1][ham];
 		
 		// No mutation
-		if (prob_Wob <= noMute)
+		//if (prob_Wob <= noMute)
+		if (prob_Wob.compareTo(noMute) <= 0)
 		{
 			comSeq[tempMuteIndex[0]] = tempPair[0];
 			comSeq[tempMuteIndex[1]] = tempPair[1];
@@ -426,11 +464,12 @@ public class UniSampleSeq {
 		}
 
 		// mutate 1
-		else if ((prob_Wob <= mu1_Wob + noMute) && (prob_Wob > noMute))
+		//else if ((prob_Wob <= mu1_Wob + noMute) && (prob_Wob > noMute))
+		else if ((prob_Wob.compareTo(mu1_Wob.add(noMute)) <= 0)
+				&& (prob_Wob.compareTo(noMute) > 0))
 		{
 			createPool(tempPair, 1);
-			
-				assert poolLen == 2;
+				//assert poolLen == 2;
 			int randInt = randi.nextInt(2);
 			String result = pool[randInt];
 			char[] resultChar = result.toCharArray();
@@ -442,7 +481,9 @@ public class UniSampleSeq {
 		}
 		
 		// mutate 2
-		else if ((prob_Wob <= mu1_Wob + noMute + mu2_Wob) && (prob_Wob > mu1_Wob + noMute))
+		//else if ((prob_Wob <= mu1_Wob + noMute + mu2_Wob) && (prob_Wob > mu1_Wob + noMute))
+		else if ((prob_Wob.compareTo(mu1_Wob.add(noMute).add(mu2_Wob)) <= 0)
+				&& (prob_Wob.compareTo(mu1_Wob.add(noMute)) > 0))
 		{
 			createPool(tempPair, 2);
 			int randInt = randi.nextInt(3);
@@ -467,27 +508,45 @@ public class UniSampleSeq {
 	{
 		
 		pool = new String[3];
-		long currentScore = parmat[single][wc][wob][ham];
+		BigInteger currentScore = parmat[single][wc][wob][ham];
 		// generate a random number of range 1 to score from matrix
-		Random randi = new Random();
+		//Random randi = new Random();
 		//int prob_Single = randi.nextInt(currentScore) + 1;
-		long prob_Single = ThreadLocalRandom.current().nextLong(currentScore) + 1;
+		//long prob_Single = ThreadLocalRandom.current().nextLong(currentScore) + 1;
 		//System.out.println(prob_Single);
-		long mu1_Single = 0;
+		
+		BigInteger mu1_Single = BigInteger.valueOf(0);
+		
+		Random randi = new Random();
+		
+		// testing
+		randi.setSeed(1);
+		
+		BigInteger prob_Single = BigInteger.valueOf(0);
+		do {
+			prob_Single = new BigInteger(currentScore.bitLength(), randi);
+			prob_Single = prob_Single.add(BigInteger.valueOf(1));
+		}
+		while (prob_Single.compareTo(currentScore) > 0);
+		
 		
 		if (ham > 0)
 		{
-			mu1_Single = 3*parmat[single-1][wc][wob][ham-1];
+			mu1_Single = parmat[single-1][wc][wob][ham-1]
+					.multiply(BigInteger.valueOf(0));
 		}
-		long noMute = parmat[single-1][wc][wob][ham];
+		BigInteger noMute = parmat[single-1][wc][wob][ham];
 		
 		// no mutation
-		if (prob_Single <= noMute)
+		//if (prob_Single <= noMute)
+		if (prob_Single.compareTo(noMute) <= 0)
 		{
 			comSeq[singIdx] = tempSing;
 			single--;
 		}
-		else if ((prob_Single <= noMute + mu1_Single) && (prob_Single > noMute))
+		//else if ((prob_Single <= noMute + mu1_Single) && (prob_Single > noMute))
+		else if ((prob_Single.compareTo(noMute.add(mu1_Single)) <= 0)
+				&& (prob_Single.compareTo(noMute) > 0))
 		{
 			// a pool for unpaired nucleotides
 			singPool = new char[3];
