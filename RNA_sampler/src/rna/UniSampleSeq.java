@@ -337,9 +337,6 @@ public class UniSampleSeq {
 		// big Integer random generator
 		Random randi = new Random();
 		
-		// testing
-		randi.setSeed(1);
-		
 		BigInteger prob_WC = BigInteger.valueOf(0);
 		do {
 			prob_WC = new BigInteger(currentScore.bitLength(), randi);
@@ -424,8 +421,6 @@ public class UniSampleSeq {
 		
 		Random randi = new Random();
 		
-		// testing
-		randi.setSeed(1);
 		
 		BigInteger prob_Wob = BigInteger.valueOf(0);
 		do {
@@ -519,9 +514,6 @@ public class UniSampleSeq {
 		
 		Random randi = new Random();
 		
-		// testing
-		randi.setSeed(1);
-		
 		BigInteger prob_Single = BigInteger.valueOf(0);
 		do {
 			prob_Single = new BigInteger(currentScore.bitLength(), randi);
@@ -533,7 +525,7 @@ public class UniSampleSeq {
 		if (ham > 0)
 		{
 			mu1_Single = parmat[single-1][wc][wob][ham-1]
-					.multiply(BigInteger.valueOf(0));
+					.multiply(BigInteger.valueOf(3));
 		}
 		BigInteger noMute = parmat[single-1][wc][wob][ham];
 		

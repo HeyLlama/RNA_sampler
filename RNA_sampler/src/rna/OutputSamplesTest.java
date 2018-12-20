@@ -3,7 +3,8 @@ package rna;
 import org.junit.jupiter.api.Test;
 
 public class OutputSamplesTest {
-	String currDir = UniRunner.currDir;
+	//String currDir = UniRunner.currDir;
+	private String currDir = "/Users/Mia/Desktop/";
 		//private String currDir = "/home/moose60/Desktop/";
 	private String inputPath = 
 			currDir + "Test_input.txt";
@@ -30,7 +31,7 @@ public class OutputSamplesTest {
 	{
 		OutputSamples out = new OutputSamples(
 				inputPath, outputPath, outputForInvf);
-		out.process(10);
+		out.process(100);
 	}
 	
 	/**

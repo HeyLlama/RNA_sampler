@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 
 public class UniSampleSeqTest{
-	//private String currDir = "/Users/Mia/Desktop/";
+	private String currDir = "/Users/Mia/Desktop/";
 			//private String currDir = "/home/moose60/Desktop/";
-	String currDir = UniRunner.currDir;
+	//String currDir = UniRunner.currDir;
 	private final String inputPath = 
 			currDir + "Test_input.txt";
 	private final String outputPath = 

@@ -3,9 +3,9 @@ package rna;
 import org.junit.jupiter.api.Test;
 public class CheckCompatibilityTest
 {
-	//private String currDir = "/Users/Mia/Desktop/";
+	private String currDir = "/Users/Mia/Desktop/";
 			//private String currDir = "/home/moose60/Desktop/";
-	String currDir = UniRunner.currDir;
+	//String currDir = UniRunner.currDir;
 	public CheckCompatibilityTest() {}
 
 	@Test

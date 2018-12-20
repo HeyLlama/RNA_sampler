@@ -87,7 +87,8 @@ public class Input {
 					// Prints the structure as input for inv. fold
 					output.println(temp);
 				
-				hd.add(Integer.parseInt(input.next()));
+				hd.add(Integer.parseInt(input.next()
+						.replaceAll("\\D", "")));
 			}
 			input.close();
 			output.close();
