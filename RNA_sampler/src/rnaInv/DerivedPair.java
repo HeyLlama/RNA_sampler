@@ -36,6 +36,7 @@ public class DerivedPair {
 	private float[] ifr;
 
 	private String originalMFE;
+	private String seqID;
 	private int hammingD;
 	private LinkedList<String> sequence;
 
@@ -48,14 +49,16 @@ public class DerivedPair {
 	 * 		Number of derived sequences
 	 */
 	public DerivedPair(String originalInput,
-			int numberOfDerSeq, int numberOfSamSeq)
+			int numberOfDerSeq, int numberOfSamSeq,
+			int hamD)
 	{
-		Input in = new Input();
+		Input in = new Input(hamD);
 		sequence = new LinkedList<String>();
 		in.parse(originalInput);
 		// header of the new file
 		originalMFE = in.getStruct();
 		hammingD = in.getHd();
+		seqID = in.getID();
 		// number of derived sequence
 		numSeq = numberOfDerSeq;
 		numSam = numberOfSamSeq;
@@ -247,6 +250,7 @@ public class DerivedPair {
 
 		// print array
 		StringBuilder str = new StringBuilder();
+		
 		for (int i = 0; i < numSeq; i++)
 		{
 			if (str.length() > 1)
@@ -261,7 +265,8 @@ public class DerivedPair {
 		
 		FileWriter fWriter = null;
 		try {
-			fWriter = new FileWriter(currDir + "IFRdata.csv", true);
+			fWriter = new FileWriter(currDir +
+					seqID + "_IFRdata.csv", true);
 			fWriter.write(ifrArr + "\n");
 			fWriter.close();
 		} catch (IOException e) {

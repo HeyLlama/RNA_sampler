@@ -16,18 +16,19 @@ import java.util.Scanner;
  *
  */
 public class Input {
-	private static int index;
+	private LinkedList<String> seqID;
 	private int size;
 	// index for counting inputs
-	private LinkedList<Integer> hd;
+	//supports multiple input
+	private int hd;
 	private LinkedList<String> seq;
 	private LinkedList<String> struct;
 
-	public Input()
+	public Input(int hamD)
 	{
-		index = 0;
+		seqID = new LinkedList<String>();
 		size = 0;
-		hd = new LinkedList<Integer>();
+		hd = hamD;
 		seq = new LinkedList<String>();
 		struct = new LinkedList<String>();
 	}
@@ -45,7 +46,7 @@ public class Input {
 
 	public int getHd()
 	{
-		return hd.remove();
+		return hd;
 	}
 
 	/**
@@ -79,16 +80,17 @@ public class Input {
 			PrintWriter output = new PrintWriter(structFile);
 			while (input.hasNextLine())
 			{
-				index = Integer.parseInt(input.next());
+				if (!input.hasNext())
+				{
+					break;
+				}
+				seqID.add(input.next());
 				seq.add(input.next());
 				
 					String temp = input.next();
 				struct.add(temp);
 					// Prints the structure as input for inv. fold
 					output.println(temp);
-				
-				hd.add(Integer.parseInt(input.next()
-						.replaceAll("\\D", "")));
 			}
 			input.close();
 			output.close();
@@ -112,10 +114,13 @@ public class Input {
 			Scanner input = new Scanner(file);
 			while (input.hasNextLine())
 			{
-				index = Integer.parseInt(input.next());
+				if (!input.hasNext())
+				{
+					break;
+				}
+				seqID.add(input.next());
 				seq.add(input.next());
 				struct.add(input.next());
-				hd.add(Integer.parseInt(input.next()));
 			}
 			input.close();
 			size = seq.size();		
@@ -127,9 +132,9 @@ public class Input {
 		}
 	}
 
-	public int getIndex()
+	public String getID()
 	{
-		return index;
+		return seqID.remove();
 	}
 
 	public boolean writeOutput(String path)
@@ -141,7 +146,7 @@ public class Input {
 
 			output.println(toStringStr(seq));
 			output.println(toStringStr(struct));
-			output.println(toStringInt(hd));
+			output.println(hd);
 			output.close();
 
 

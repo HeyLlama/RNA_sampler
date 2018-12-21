@@ -83,9 +83,9 @@ public class UniSampleSeq {
 	}
 	
 	
-	public UniSampleSeq(String path)
+	public UniSampleSeq(String path, int hamD)
 	{
-		Input in = new Input();
+		Input in = new Input(hamD);
 		in.parse(path);	
 		hd = in.getHd();
 		seq = in.getSeq().toCharArray();

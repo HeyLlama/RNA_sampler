@@ -12,7 +12,7 @@ public class DerivedPairTest {
 	{
 		der = new DerivedPair(currDir +
 				"Test_input.txt",
-				100, 100);
+				100, 100, 1);
 		//
 		der.cleanUpInvfOutput(currDir + "invf.txt",
 				currDir + "Test_Derived.txt");
@@ -30,7 +30,7 @@ public class DerivedPairTest {
 		// Produce derived sequences
 		der = new DerivedPair(
 				currDir + "Test_input.txt",
-				100, 100);
+				100, 100, 1);
 		
 		der.cleanUpInvfOutput(currDir + "invf.txt",
 				currDir + "Test_Derived.txt");
@@ -62,7 +62,7 @@ public class DerivedPairTest {
 	{
 		DerivedPair der = new DerivedPair(
 				currDir + "Test_input.txt",
-				100, 100);
+				100, 100, 1);
 		
 		der.cleanUpInvfOutput(currDir + "invf.txt",
 				currDir + "Test_Derived.txt");
@@ -77,7 +77,7 @@ public class DerivedPairTest {
 	{
 		DerivedPair der = new DerivedPair(
 				currDir + "Test_input.txt",
-				100, 100);
+				100, 100, 1);
 		
 		der.cleanUpInvfOutput(currDir + "invf.txt",
 				currDir + "Test_Derived.txt");

@@ -12,9 +12,9 @@ public class CompareInverse {
 	private int numIdenRa;
 	private int numTotal;
 	
-	public CompareInverse(String inputPath)
+	public CompareInverse(String inputPath, int hamD)
 	{
-		Input in = new Input();
+		Input in = new Input(hamD);
 		in.parse(inputPath);
 		
 		// read the original structure

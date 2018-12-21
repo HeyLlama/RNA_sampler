@@ -18,10 +18,10 @@ public class CompareStructure {
 	private int orgHd;
 	private float result;
 
-	public CompareStructure(String inputPath)
+	public CompareStructure(String inputPath, int hamD)
 	{
 		//parse input
-		Input in = new Input();
+		Input in = new Input(hamD);
 		in.parse(inputPath);
 
 		// read parsed input

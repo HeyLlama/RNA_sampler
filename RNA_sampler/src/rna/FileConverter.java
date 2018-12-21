@@ -299,13 +299,4 @@ public class FileConverter {
 		scanner.close();
 		structW.close();
 	}
-	
-	/**
-	 *  This method rewrites the input file according 
-	 *  to the input parameter from the shell script
-	 */
-	public void rewrite(int i)
-	{
-		// insert 
-	}
 }

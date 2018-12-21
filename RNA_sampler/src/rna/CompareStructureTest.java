@@ -13,7 +13,7 @@ public class CompareStructureTest {
 	public void testCreateFile()
 	{
 		CompareStructure com = new CompareStructure(
-				currDir + "Test_input.txt");
+				currDir + "Test_input.txt", 1);
 		com.compareWith(currDir + "structures.txt");
 		com.compIFR();
 		com.outputIFR();

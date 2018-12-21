@@ -23,9 +23,9 @@ public class OutputSamples {
 	 * path is the file path
 	 */
 	public OutputSamples(String inputPath, String outputPath,
-			String outputPathInvf)
+			String outputPathInvf, int hamD)
 	{
-		input = new Input();
+		input = new Input(hamD);
 		input.parse(inputPath, outputPathInvf);
 		outputFile = new File(outputPath);
 		try {

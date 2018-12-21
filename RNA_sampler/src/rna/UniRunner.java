@@ -6,7 +6,7 @@ import rnaInv.DerivedPair;
 
 public class UniRunner {
 	private static String currDir = "/Users/Mia/Desktop/";
-		//private static String currDir = "/home/moose60/Desktop/";
+	//private static String currDir = "/home/moose60/Desktop/";
 	/**
 	 * The input form the terminal will
 	 * be the paths for the input and 
@@ -17,14 +17,15 @@ public class UniRunner {
 	public static void main(String[] args)
 	{
 		// if user given arguments
-		if (args.length == 4)
+		if (args.length == 5)
 		{
 			// takes the first path
 			File newFile = new File(args[0]);
 			if (newFile.isDirectory())
 			{
 				OutputSamples out = new OutputSamples(
-						args[0],args[1], args[2]);
+						args[0],args[1], args[2],
+						Integer.parseInt(args[4]));
 				int numSamples = 
 						Integer.parseInt(args[3]);
 				out.process(numSamples);
@@ -63,42 +64,52 @@ public class UniRunner {
 			}
 			 */
 
+		}
+
+		// Parameters
+		// 1. Function name
+		// 2. Hamming Distance
+		else if (args.length == 2)
+		{
+
 			// compare structures
 			// gives the IFR for native pair
-			else if (args[0].equals("CompareStruct"))
+			if (args[0].equals("CompareStruct"))
 			{
 				CompareStructure comp = new CompareStructure(
-						currDir + "Test_input.txt");
+						currDir + "Test_input.txt", 
+						Integer.valueOf(args[1]));
 				comp.compareWith(currDir + "structures.txt");
 				comp.compIFR();
 				comp.outputIFR();
 			}
-
 			// compare inverseFold sequence with original sequence
 			else if (args[0].equals("CompareInvf"))
 			{
 				CompareInverse inv = new CompareInverse(
-						currDir + "Test_input.txt");
+						currDir + "Test_input.txt",
+						Integer.valueOf(args[1]));
 				inv.compareWith(currDir + "invf.txt");
 				System.out.println("Inverse fold sequence"
 						+ " comparison completed!");
 			}
-			
-
-
 		}
-		
+
 		// Parameters
-		// 1. Function name
-		// 2. Number of desired samples
-		else if (args.length == 2)
+		// 1: function name
+		// 2: number of derived sequences
+		// 3: number of desired samples
+		// OR 3: Hamming ditance
+		else if (args.length == 3)
 		{
+
 			if (args[0].equals("Process"))
 			{
 				OutputSamples out = new OutputSamples(
 						currDir + "Test_input.txt",
 						currDir + "Test_uniform.txt",
-						currDir + "inv.in");
+						currDir + "inv.in",
+						Integer.valueOf(args[2]));
 				out.process(Integer.valueOf(args[1]));
 				FileConverter converter = new FileConverter();
 
@@ -107,13 +118,10 @@ public class UniRunner {
 						currDir + "Test_uniform_out.fasta");
 				System.out.println("Sample completed!");
 			}
+
 		}
-		// Parameters
-		// 1: function name
-		// 2: number of derived sequences
-		// 3: number of desired samples
- 
-		else if (args.length == 3)
+
+		else if (args.length == 4)
 		{
 			// Computes the derived sequences
 			// computes the IFR for the derived pair
@@ -123,7 +131,8 @@ public class UniRunner {
 				DerivedPair der = new DerivedPair(
 						currDir + "Test_input.txt",
 						Integer.valueOf(args[1]),
-						Integer.valueOf(args[2]));
+						Integer.valueOf(args[2]),
+						Integer.valueOf(args[3]));
 
 				der.cleanUpInvfOutput(currDir + "invf.txt",
 						currDir + "Test_Derived.txt");
@@ -140,7 +149,8 @@ public class UniRunner {
 				DerivedPair der = new DerivedPair(
 						currDir + "Test_input.txt",
 						Integer.valueOf(args[1]),
-						Integer.valueOf(args[2]));
+						Integer.valueOf(args[2]),
+						Integer.valueOf(args[3]));
 				der.compareStructure();
 				der.printString();
 				der.outputIFR();

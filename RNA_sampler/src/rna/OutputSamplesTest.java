@@ -19,7 +19,7 @@ public class OutputSamplesTest {
 	public void testPrintMatrix()
 	{
 		OutputSamples out = new OutputSamples(
-				inputPath, outputPath, outputForInvf);
+				inputPath, outputPath, outputForInvf, 1);
 		out.printPartitionMatrix();	
 	}
 	
@@ -30,7 +30,7 @@ public class OutputSamplesTest {
 	public void testOutput()
 	{
 		OutputSamples out = new OutputSamples(
-				inputPath, outputPath, outputForInvf);
+				inputPath, outputPath, outputForInvf, 1);
 		out.process(100);
 	}
 	
@@ -41,7 +41,7 @@ public class OutputSamplesTest {
 	public void testFile()
 	{
 		OutputSamples out = new OutputSamples(
-				inputPath, outputPath, outputForInvf);
+				inputPath, outputPath, outputForInvf, 1);
 		out.process(1000);
 	}
 

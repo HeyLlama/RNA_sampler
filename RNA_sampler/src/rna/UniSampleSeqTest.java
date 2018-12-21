@@ -21,7 +21,7 @@ public class UniSampleSeqTest{
 	public void testOutputSamples()
 	{
 		OutputSamples out = new OutputSamples(
-				inputPath, outputPath, outputForInvf);
+				inputPath, outputPath, outputForInvf, 1);
 		int numSamples = 10;
 		out.process(numSamples);
 	}
