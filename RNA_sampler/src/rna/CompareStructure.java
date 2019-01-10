@@ -9,10 +9,12 @@ import java.util.Scanner;
 
 public class CompareStructure {
 	// ~ Fields
-	static String currDir = "/Users/Mia/Desktop/";
+	static String currDir = System.getProperty("user.dir")
+			+ "/";
 			//private String currDir = "/home/moose60/Desktop/";
 	//String currDir = UniRunner.currDir;
 	private String orgMFEStruct;
+	private String seqID;
 	private int numIdenNa; 
 	private int numTotal;
 	private int orgHd;
@@ -27,6 +29,7 @@ public class CompareStructure {
 		// read parsed input
 		orgMFEStruct = in.getStruct();
 		orgHd = in.getHd();
+		seqID = in.getID();
 	}
 
 	/**
@@ -107,7 +110,7 @@ public class CompareStructure {
 	 */
 	public void compIFR()
 	{
-		System.out.println("The IFR for native pair: ");
+		System.out.println("Mean IFR for native pairs: ");
 		result = (float)numIdenNa / numTotal;
 		System.out.println(Float.toString(result));
 		
@@ -139,8 +142,10 @@ public class CompareStructure {
 	{
 		FileWriter fWriter = null;
 		try {
-			fWriter = new FileWriter(currDir + "IFRdata.csv", true);
-			fWriter.write(Integer.toString(orgHd) + ", " + Float.toString(result) + ", ");
+			fWriter = new FileWriter(currDir + seqID + "_IFRdata.csv", true);
+			//print the result for native pair
+			fWriter.write(String.valueOf(orgHd)
+					+ "," + Float.toString(result) + ",");
 			fWriter.close();
 		} catch (IOException e) {
 			System.out.print("Cannot create file");

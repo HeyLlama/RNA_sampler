@@ -3,7 +3,8 @@ package rnaInv;
 import org.junit.jupiter.api.Test;
 
 public class DerivedPairTest {
-	private String currDir = "/Users/Mia/Desktop/";
+	private String currDir =
+			System.getProperty("user.dir");
 		//private String currDir = "/home/moose60/Desktop/";
 	private DerivedPair der;
 	
@@ -20,7 +21,7 @@ public class DerivedPairTest {
 		//		"/Users/Mia/Desktop/Test_DerivedSamples.txt");
 	}
 	
-	@Test
+	//@Test
 	public void testDerivedProcedure()
 	{
 		// compute the inverse fold first
@@ -47,7 +48,7 @@ public class DerivedPairTest {
 		der.compareStructure();
 		der.printString();
 		der.outputIFR();
-		der.meanIFR();
+		//der.meanIFR();
 		
 		// Further analysis
 		//der.convertWIndex();
@@ -57,7 +58,7 @@ public class DerivedPairTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testSeparationP1()
 	{
 		DerivedPair der = new DerivedPair(
@@ -72,7 +73,7 @@ public class DerivedPairTest {
 				currDir + "Test_DerivedSamples.fasta");
 	}
 	
-	@Test
+	//@Test
 	public void testSeparationP2()
 	{
 		DerivedPair der = new DerivedPair(
@@ -85,5 +86,12 @@ public class DerivedPairTest {
 		// generate n sequences for each pair
 		der.uniSamDerived(
 				currDir + "Test_DerivedSamples.fasta");
+	}
+	
+	@Test
+	public void testDir()
+	{
+		System.out.println(
+	              System.getProperty("user.dir"));
 	}
 }

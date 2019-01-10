@@ -5,7 +5,8 @@ import java.io.File;
 import rnaInv.DerivedPair;
 
 public class UniRunner {
-	private static String currDir = "/Users/Mia/Desktop/";
+	//private static String currDir =
+			//System.getProperty("user.dir");
 	//private static String currDir = "/home/moose60/Desktop/";
 	/**
 	 * The input form the terminal will
@@ -30,6 +31,10 @@ public class UniRunner {
 						Integer.parseInt(args[3]);
 				out.process(numSamples);
 			}
+			else
+			{
+				System.out.printf("Error: wrong file path");
+			}
 		}
 		// First parameter function name
 		else if (args.length == 1)
@@ -40,15 +45,19 @@ public class UniRunner {
 			{
 				FileConverter converter = new FileConverter();
 				converter.convertFASTAtoInput(
-						currDir + "InputSequence.fasta",
-						currDir + "Test_input.txt");
+						System.getProperty("user.dir")
+						+ "/InputSequence.fasta",
+						System.getProperty("user.dir")
+						+ "/Test_input.txt");
 			}
 			// assuming .fold file exist
 			else if (args[0].equals("Convert"))
 			{
 				FileConverter converter = new FileConverter();
-				converter.convertFoldToTxt(currDir + "seq1.fold",
-						currDir + "structures.txt");
+				converter.convertFoldToTxt(System.getProperty("user.dir")
+						+ "/seq1.fold",
+						System.getProperty("user.dir")
+						+ "/structures.txt");
 			}
 
 
@@ -77,9 +86,11 @@ public class UniRunner {
 			if (args[0].equals("CompareStruct"))
 			{
 				CompareStructure comp = new CompareStructure(
-						currDir + "Test_input.txt", 
+						System.getProperty("user.dir")
+						+ "/Test_input.txt", 
 						Integer.valueOf(args[1]));
-				comp.compareWith(currDir + "structures.txt");
+				comp.compareWith(System.getProperty("user.dir")
+						+ "/structures.txt");
 				comp.compIFR();
 				comp.outputIFR();
 			}
@@ -87,9 +98,11 @@ public class UniRunner {
 			else if (args[0].equals("CompareInvf"))
 			{
 				CompareInverse inv = new CompareInverse(
-						currDir + "Test_input.txt",
+						System.getProperty("user.dir")
+						+ "/Test_input.txt",
 						Integer.valueOf(args[1]));
-				inv.compareWith(currDir + "invf.txt");
+				inv.compareWith(System.getProperty("user.dir")
+						+ "/invf.txt");
 				System.out.println("Inverse fold sequence"
 						+ " comparison completed!");
 			}
@@ -106,16 +119,21 @@ public class UniRunner {
 			if (args[0].equals("Process"))
 			{
 				OutputSamples out = new OutputSamples(
-						currDir + "Test_input.txt",
-						currDir + "Test_uniform.txt",
-						currDir + "inv.in",
+						System.getProperty("user.dir")
+						+ "/Test_input.txt",
+						System.getProperty("user.dir")
+						+ "/Test_uniform.txt",
+						System.getProperty("user.dir")
+						+ "/inv.in",
 						Integer.valueOf(args[2]));
 				out.process(Integer.valueOf(args[1]));
 				FileConverter converter = new FileConverter();
 
 				converter.convertTxtToFASTAseq(
-						currDir + "Test_uniform.txt",
-						currDir + "Test_uniform_out.fasta");
+						System.getProperty("user.dir")
+						+ "/Test_uniform.txt",
+						System.getProperty("user.dir")
+						+ "/Test_uniform_out.fasta");
 				System.out.println("Sample completed!");
 			}
 
@@ -129,16 +147,20 @@ public class UniRunner {
 			{
 				// Produce derived sequences
 				DerivedPair der = new DerivedPair(
-						currDir + "Test_input.txt",
+						System.getProperty("user.dir")
+						+ "/Test_input.txt",
 						Integer.valueOf(args[1]),
 						Integer.valueOf(args[2]),
 						Integer.valueOf(args[3]));
 
-				der.cleanUpInvfOutput(currDir + "invf.txt",
-						currDir + "Test_Derived.txt");
+				der.cleanUpInvfOutput(System.getProperty("user.dir")
+						+ "/invf.txt",
+						System.getProperty("user.dir")
+						+ "/Test_Derived.txt");
 
 				// generate n sequences for each pair
-				der.uniSamDerived(currDir + "Test_DerivedSamples.fasta");
+				der.uniSamDerived(System.getProperty("user.dir")
+						+ "/Test_DerivedSamples.fasta");
 			}
 
 			// This begins after the sequences are folded
@@ -147,14 +169,17 @@ public class UniRunner {
 			else if (args[0].equals("CompareInvFold"))
 			{
 				DerivedPair der = new DerivedPair(
-						currDir + "Test_input.txt",
+						System.getProperty("user.dir")
+						+ "/Test_input.txt",
 						Integer.valueOf(args[1]),
 						Integer.valueOf(args[2]),
 						Integer.valueOf(args[3]));
 				der.compareStructure();
-				der.printString();
+				//der.printString();
 				der.outputIFR();
-				der.meanIFR();
+				//der.meanIFR();
+				
+				
 				// Test
 				//der.convertWIndex();
 				//der.printMFEWIndex();

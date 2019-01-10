@@ -13,15 +13,14 @@ import rna.Input;
 import rna.UniSampleSeq;
 
 /**
- * Precondition:
- * Another program takes 
  * @author Mia
  *
  */
 public class DerivedPair {
 
 	// ~ Fields
-	private String currDir = "/Users/Mia/Desktop/";
+	private String currDir =
+			System.getProperty("user.dir") + "/";
 		//private String currDir = "/home/moose60/Desktop/";
 	
 	// Number of derived pair
@@ -39,6 +38,8 @@ public class DerivedPair {
 	private String seqID;
 	private int hammingD;
 	private LinkedList<String> sequence;
+	
+	private float IFRderived;
 
 	// object arrays for uniSamplers
 
@@ -249,6 +250,8 @@ public class DerivedPair {
 		}
 
 		// print array
+		
+		/*
 		StringBuilder str = new StringBuilder();
 		
 		for (int i = 0; i < numSeq; i++)
@@ -259,20 +262,52 @@ public class DerivedPair {
 			}
 			str.append(ifr[i]);
 		}
-		System.out.println("IFR array");
-		String ifrArr = str.toString();
-		System.out.println(ifrArr);
+		*/
+		//System.out.println("IFR array");
+		//String ifrArr = str.toString();
+		//System.out.println(ifrArr);
+		
+		float total = 0;
+		for (int i = 0; i < numSeq; i++)
+		{
+			total = total + ifr[i];
+		}
+		float result = total / numSeq;
+		IFRderived = result;
+		System.out.println("Mean IFR for derived pairs: ");
+		System.out.println(result);
 		
 		FileWriter fWriter = null;
 		try {
 			fWriter = new FileWriter(currDir +
-					seqID + "_IFRdata.csv", true);
-			fWriter.write(ifrArr + "\n");
+					seqID + "_IFR.csv", true);
+			fWriter.write(String.valueOf(IFRderived) + "\n");
+			//fWriter.write(ifrArr + "\n");
 			fWriter.close();
 		} catch (IOException e) {
 			System.out.print("Cannot open file");
 			e.printStackTrace();
 		}
+		
+		//call to output IFR native
+	}
+	
+	/**
+	 * Writes string data to csv file.
+	 */
+	public void writeToCSV(String str)
+	{
+		FileWriter fWriter = null;
+		try {
+			fWriter = new FileWriter(currDir +
+					seqID + "_IFRdata.csv", true);
+			fWriter.write(","+str);
+			fWriter.close();
+		} catch (IOException e) {
+			System.out.print("Cannot open file");
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -283,17 +318,12 @@ public class DerivedPair {
 	 *  -> Store into numerical array
 	 *  -> Compute the mean for the array
 	 */
+	/*
 	public void meanIFR()
 	{
-		float total = 0;
-		for (int i = 0; i < numSeq; i++)
-		{
-			total = total + ifr[i];
-		}
-		float result = total / numSeq;
-		System.out.println("Mean IFR for derived pairs: ");
-		System.out.println(result);
+		
 	}
+	*/
 
 	/**
 	 * For testing purposes

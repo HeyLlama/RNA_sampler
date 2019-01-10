@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Input {
 	private LinkedList<String> seqID;
-	private int size;
+	private int size; 
 	// index for counting inputs
 	//supports multiple input
 	private int hd;

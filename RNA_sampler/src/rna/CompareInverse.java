@@ -72,7 +72,7 @@ public class CompareInverse {
 	 */
 	public void compIFR()
 	{
-		System.out.println("The IFR for derived pair is:");
+		System.out.println("The IFR for native pair is:");
 		float result = numIdenRa / numTotal;
 		System.out.println(Float.toString(result));
 	}
