@@ -280,7 +280,7 @@ public class DerivedPair {
 		FileWriter fWriter = null;
 		try {
 			fWriter = new FileWriter(currDir +
-					seqID + "_IFR.csv", true);
+					seqID + "_IFRdata.csv", true);
 			fWriter.write(String.valueOf(IFRderived) + "\n");
 			//fWriter.write(ifrArr + "\n");
 			fWriter.close();
